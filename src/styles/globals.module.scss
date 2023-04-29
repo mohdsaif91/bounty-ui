@@ -1,0 +1,37 @@
+.main_body {
+  background-color: #4051a5;
+  margin: 0 !important;
+  font-family: "Poppins", sans-serif;
+  font-family: "Roboto Mono", monospace;
+  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.btn {
+  padding: 12px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  background-color: #247aff;
+  color: #fff;
+  &:hover {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+  padding: 6px 2px;
+}
+
+.input_element {
+  padding: 6px 4px !important;
+  // border-radius: 4px;
+  font-size: 16px;
+  border-bottom: 1px solid #333;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}

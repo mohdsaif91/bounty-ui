@@ -1,0 +1,27 @@
+.navBarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  padding: 16px 32px;
+  background: rgb(122, 78, 190);
+  background: linear-gradient(
+    121deg,
+    rgba(122, 78, 190, 1) 2.95%,
+    rgba(56, 42, 146, 1) 73%
+  );
+
+  // background-color: ;
+
+  .navLinksContainer {
+    list-style: none;
+    display: flex;
+    .link {
+      text-decoration: none;
+      .navLink {
+        color: #f0f0f0;
+        margin-right: 24px;
+      }
+    }
+  }
+}
