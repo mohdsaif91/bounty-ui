@@ -9,22 +9,22 @@ import styles from "@/styles/Home.module.scss";
 
 interface formDataInterface {
   userName: string;
-  discordUserName: string;
+  discord_UserName: string;
   email: string;
   password: string;
   confirmPassword: string;
-  githubUserName: string;
+  github_UserName: string;
   link: string;
   avatar: string;
 }
 
 const initialFormData = {
   userName: "",
-  discordUserName: "",
+  discord_UserName: "",
   email: "",
   password: "",
   confirmPassword: "",
-  githubUserName: "",
+  github_UserName: "",
   link: "",
   avatar: "",
 };
@@ -116,22 +116,22 @@ export default function Home() {
               <input
                 className={globalStyles.input_element}
                 onChange={(e) => handleChange(e)}
-                name="discordUserName"
+                name="discord_UserName"
                 aria-describedby="discordUsername--error"
                 placeholder="Warden#1234"
                 type="text"
                 autoComplete="off"
-                value={formData.discordUserName}
+                value={formData.discord_UserName}
                 onBlur={() =>
-                  formData.discordUserName === "" &&
+                  formData.discord_UserName === "" &&
                   setFormError({
                     ...formError,
-                    discordUserName: "Discord Username is reuqired.",
+                    discord_UserName: "Discord Username is reuqired.",
                   })
                 }
               />
               <div className={globalStyles.error}>
-                {formError.discordUserName}
+                {formError.discord_UserName}
               </div>
             </div>
           </div>
@@ -239,15 +239,15 @@ export default function Home() {
               <input
                 className={globalStyles.input_element}
                 onChange={handleChange}
-                name="githubUserName"
+                name="github_UserName"
                 aria-describedby="gitHubUsername--error"
                 placeholder="Username"
                 type="text"
                 autoComplete="off"
-                value={formData.githubUserName}
+                value={formData.github_UserName}
               />
               <div className={globalStyles.error}>
-                {formError.githubUserName}
+                {formError.github_UserName}
               </div>
             </div>
           </div>

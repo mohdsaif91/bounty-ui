@@ -8,10 +8,10 @@ const Navbar = () => {
     <nav className={Styles.navBarContainer}>
       <div>Logo</div>
       <ul className={Styles.navLinksContainer}>
-        <Link className={Styles.link} href="#">
-          <li className={Styles.navLink}>How it works</li>
+        <Link className={Styles.link} href="/developers">
+          <li className={Styles.navLink}>Developers</li>
         </Link>
-        <Link className={Styles.link} href="#">
+        {/* <Link className={Styles.link} href="#">
           <li className={Styles.navLink}>Leaderboard</li>
         </Link>
         <Link className={Styles.link} href="#">
@@ -25,7 +25,7 @@ const Navbar = () => {
         </Link>
         <Link className={Styles.link} href="#">
           <li className={Styles.navLink}>Helps</li>
-        </Link>
+        </Link> */}
       </ul>
     </nav>
   );

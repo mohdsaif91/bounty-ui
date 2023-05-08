@@ -9,7 +9,7 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
-      <body style={{ margin: 0 }} className="main_body">
+      <body style={{ margin: 0 }}>
         <Main />
         <NextScript />
       </body>

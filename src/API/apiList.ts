@@ -1,7 +1,8 @@
 const v1 = "/api/v1";
 
-const registerUser = `${v1}/developer`;
+const developerV1 = `${v1}/developer`;
 
 export const apiList = {
-  addDeveloper: `${registerUser}/add`,
+  addDeveloper: `${developerV1}/add`,
+  getDeveloper: `${developerV1}`,
 };
