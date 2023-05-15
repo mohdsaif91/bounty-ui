@@ -30,7 +30,7 @@ function upload() {
                   method: "post",
                   data: formData,
                 };
-                authenticApi(payload)
+                authenticApi(payload, true)
                   .then((res) => {
                     console.log(res);
 

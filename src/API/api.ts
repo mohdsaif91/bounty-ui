@@ -3,11 +3,11 @@ import Axios from "axios";
 const url = "http://localhost:5000";
 // const url = "";
 
-export const authenticApi = async (payload: any) => {
+export const authenticApi = async (payload: any, formData = false) => {
   const axios = Axios.create({
     baseURL: url,
     headers: {
-      "Content-type": "application/json",
+      "Content-type": formData ? "multipart/form-data" : "application/json",
     },
   });
   const res = axios(payload.url, {
