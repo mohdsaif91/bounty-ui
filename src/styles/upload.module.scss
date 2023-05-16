@@ -7,4 +7,16 @@
       margin-bottom: 16px;
     }
   }
+  .functionDisplayContainer {
+    margin: 40px;
+    border: 1px solid #363333;
+    .functionDisplayContainerItem {
+      display: flex;
+      flex-direction: column;
+      .function {
+        font-weight: 700;
+        padding: 16px;
+      }
+    }
+  }
 }

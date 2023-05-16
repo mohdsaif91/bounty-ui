@@ -8,6 +8,8 @@ import Loader from "@/Components/Loader";
 
 function upload() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [functionArray, setFunctionArray] = useState<any>([]);
+
   return (
     <div className={style.uploadContainer}>
       <div className={style.file_upload_container}>
@@ -32,16 +34,13 @@ function upload() {
                 };
                 authenticApi(payload, true)
                   .then((res) => {
-                    console.log(res);
-
-                    // setLoading(false);
+                    setLoading(false);
+                    setFunctionArray(res.data);
                   })
                   .catch((err) => {
                     console.log(err);
-
-                    // setLoading(false);
+                    setLoading(false);
                   });
-                //   console.log(e.target.files[0].name);
               } else {
                 console.log("No FILE ACCEPTED");
               }
@@ -49,6 +48,15 @@ function upload() {
           />
         )}
       </div>
+      {Array.isArray(functionArray) && functionArray.length != 0 && (
+        <div className={style.functionDisplayContainer}>
+          {functionArray.map((m: any, index: number) => (
+            <div className={style.functionDisplayContainerItem}>
+              <div className={style.function}>{m}</div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
