@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 import { authenticApi } from "@/API/api";
 import { apiList } from "@/API/apiList";
@@ -9,6 +10,8 @@ import Loader from "@/Components/Loader";
 function upload() {
   const [loading, setLoading] = useState<boolean>(false);
   const [functionArray, setFunctionArray] = useState<any>([]);
+
+  const router = useRouter();
 
   return (
     <div className={style.uploadContainer}>
@@ -34,6 +37,10 @@ function upload() {
                 };
                 authenticApi(payload, true)
                   .then((res) => {
+                    router.push({
+                      pathname: "/contract/list",
+                      query: res.data,
+                    });
                     setLoading(false);
                     setFunctionArray(res.data);
                   })
@@ -50,6 +57,7 @@ function upload() {
       </div>
       {Array.isArray(functionArray) && functionArray.length != 0 && (
         <div className={style.functionDisplayContainer}>
+          <div></div>
           {functionArray.map((m: any, index: number) => (
             <div className={style.functionDisplayContainerItem}>
               <div className={style.function}>{m}</div>
