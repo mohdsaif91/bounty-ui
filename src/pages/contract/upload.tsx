@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import { authenticApi } from "@/API/api";
 import { apiList } from "@/API/apiList";
 
-import style from "../styles/upload.module.scss";
+// ../styles/upload.module.scss
+import style from "../../styles/upload.module.scss";
 import Loader from "@/Components/Loader";
 
 function upload() {
@@ -37,12 +38,18 @@ function upload() {
                 };
                 authenticApi(payload, true)
                   .then((res) => {
-                    router.push({
-                      pathname: "/contract/list",
-                      query: res.data,
-                    });
                     setLoading(false);
-                    setFunctionArray(res.data);
+                    if (res.status === 200) {
+                      console.log(res.data);
+
+                      router.push({
+                        pathname: "/contract/list",
+                        query: {
+                          contractData: res.data,
+                        },
+                      });
+                    }
+                    // setFunctionArray(res.data);
                   })
                   .catch((err) => {
                     console.log(err);
