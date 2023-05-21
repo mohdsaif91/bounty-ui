@@ -3,9 +3,15 @@ import { useRouter } from "next/router";
 
 import Styles from "../../styles/contractList.module.scss";
 import globalStyle from "../../styles/globals.module.scss";
+import { numberRegx } from "@/util/util";
+
+interface functionNameArrayObj {
+  bountyValue: number;
+  functionName: string;
+}
 
 interface contractData {
-  functionNameArray: [];
+  functionNameArray: functionNameArrayObj[];
   contractName: string;
 }
 
@@ -20,10 +26,12 @@ const ContractList = (): JSX.Element => {
 
   useEffect(() => {
     if (router.isReady) {
-      console.log(JSON.parse(router.query.contractData));
+      // console.log(JSON.parse(router.query.contractData));
       setContractdata(JSON.parse(router.query.contractData));
     }
   }, [router.isReady]);
+
+  console.log(contractdata);
 
   return (
     <div className={Styles.listContainer}>
@@ -40,12 +48,30 @@ const ContractList = (): JSX.Element => {
                 </div>
                 <div key={i} className={Styles.contractDetialsContainer}>
                   {m.functionNameArray.map((fm: any, fmi: number) => (
-                    <div className={Styles.functionContainer}>
-                      <div className={Styles.functionNameContainer}>{fm}</div>
+                    <div key={fmi} className={Styles.functionContainer}>
+                      <div className={Styles.functionNameContainer}>
+                        {fm.functionName}
+                      </div>
                       <div className={Styles.inputAmountContainer}>
                         <input
                           className={`${Styles.bountyAmount} ${globalStyle.input_element}`}
                           placeholder="Enter bounty"
+                          value={fm.bountyValue}
+                          onChange={(e) => {
+                            if (
+                              numberRegx.test(e.target.value) ||
+                              e.target.value.length === 0
+                            ) {
+                              contractdata[i].functionNameArray[fmi] = {
+                                bountyValue:
+                                  e.target.value === ""
+                                    ? 0
+                                    : parseInt(e.target.value),
+                                functionName: fm.functionName,
+                              };
+                              setContractdata([...contractdata]);
+                            }
+                          }}
                         />
                         <label className={Styles.bountyAmountLabel}>ETH</label>
                       </div>
@@ -53,6 +79,11 @@ const ContractList = (): JSX.Element => {
                   ))}
                   <div className={Styles.finalSum}>
                     <input
+                      value={m.functionNameArray.reduce(
+                        (previousValue: any, currentValue: any) =>
+                          previousValue + currentValue,
+                        0
+                      )}
                       disabled={true}
                       className={`${Styles.bountyAmount} ${globalStyle.input_element}`}
                       placeholder="Final contract bounty"
