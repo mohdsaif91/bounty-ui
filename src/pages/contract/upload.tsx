@@ -45,7 +45,7 @@ function upload() {
                       router.push({
                         pathname: "/contract/list",
                         query: {
-                          contractData: res.data,
+                          contractData: JSON.stringify(res.data),
                         },
                       });
                     }
