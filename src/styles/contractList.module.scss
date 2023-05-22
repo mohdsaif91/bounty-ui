@@ -53,6 +53,17 @@
       height: 100px;
     }
   }
+  .finalSumContainer {
+    margin: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .finalSumItem {
+      padding: 16px 32px;
+      border-radius: 4px;
+      border: 1px solid #363333;
+    }
+  }
 }
 
 .bountyAmount {

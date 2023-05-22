@@ -22,42 +22,48 @@ function upload() {
           <Loader />
         ) : (
           <input
+            multiple={true}
             type="file"
             accept=".sol"
             onChange={(e: any) => {
               setLoading(true);
-              if (e.target.files[0].name.split(".").pop() === "sol") {
-                const formData = new FormData();
-                console.log(e.target.files[0]);
+              // if (e.target.files[0].name.split(".").pop() === "sol") {
+              const formData = new FormData();
+              console.log(typeof e.target.files);
 
-                formData.append("solFile", e.target.files[0]);
-                const payload = {
-                  url: apiList.uploadContract,
-                  method: "post",
-                  data: formData,
-                };
-                authenticApi(payload, true)
-                  .then((res) => {
-                    setLoading(false);
-                    if (res.status === 200) {
-                      console.log(res.data);
+              // e.target.files.map((m: any) => {
+              //   console.log(m);
+              // });
+              Object.keys(e.target.files).forEach((key) => {
+                formData.append("solFile", e.target.files[key]);
+              });
+              const payload = {
+                url: apiList.uploadContract,
+                method: "post",
+                data: formData,
+              };
+              authenticApi(payload, true)
+                .then((res) => {
+                  setLoading(false);
+                  if (res.status === 200) {
+                    console.log(res.data);
 
-                      router.push({
-                        pathname: "/contract/list",
-                        query: {
-                          contractData: JSON.stringify(res.data),
-                        },
-                      });
-                    }
-                    // setFunctionArray(res.data);
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    setLoading(false);
-                  });
-              } else {
-                console.log("No FILE ACCEPTED");
-              }
+                    router.push({
+                      pathname: "/contract/list",
+                      query: {
+                        contractData: JSON.stringify(res.data),
+                      },
+                    });
+                  }
+                  // setFunctionArray(res.data);
+                })
+                .catch((err) => {
+                  console.log(err);
+                  setLoading(false);
+                });
+              // } else {
+              //   console.log("No FILE ACCEPTED");
+              // }
             }}
           />
         )}

@@ -6,7 +6,7 @@ export const validateString = (str: any) => {
   return /^[a-zA-Z0-9_ ]*$/.test(str);
 };
 
-export const numberRegx = /^\d+(\.\d{1,2})?$/;
+// export const numberRegx = /^\d+(\.\d{1,2})?$/;
 
 export const getFormData = (data: any) => {
   const formData = new FormData();
