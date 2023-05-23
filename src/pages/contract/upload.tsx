@@ -3,14 +3,12 @@ import { useRouter } from "next/router";
 
 import { authenticApi } from "@/API/api";
 import { apiList } from "@/API/apiList";
-
-// ../styles/upload.module.scss
-import style from "../../styles/upload.module.scss";
 import Loader from "@/Components/Loader";
+
+import style from "../../styles/upload.module.scss";
 
 function upload() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [functionArray, setFunctionArray] = useState<any>([]);
 
   const router = useRouter();
 
@@ -27,13 +25,7 @@ function upload() {
             accept=".sol"
             onChange={(e: any) => {
               setLoading(true);
-              // if (e.target.files[0].name.split(".").pop() === "sol") {
               const formData = new FormData();
-              console.log(typeof e.target.files);
-
-              // e.target.files.map((m: any) => {
-              //   console.log(m);
-              // });
               Object.keys(e.target.files).forEach((key) => {
                 formData.append("solFile", e.target.files[key]);
               });
@@ -55,29 +47,15 @@ function upload() {
                       },
                     });
                   }
-                  // setFunctionArray(res.data);
                 })
                 .catch((err) => {
                   console.log(err);
                   setLoading(false);
                 });
-              // } else {
-              //   console.log("No FILE ACCEPTED");
-              // }
             }}
           />
         )}
       </div>
-      {Array.isArray(functionArray) && functionArray.length != 0 && (
-        <div className={style.functionDisplayContainer}>
-          <div></div>
-          {functionArray.map((m: any, index: number) => (
-            <div className={style.functionDisplayContainerItem}>
-              <div className={style.function}>{m}</div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

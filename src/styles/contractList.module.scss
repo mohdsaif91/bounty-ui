@@ -23,6 +23,8 @@
       align-items: center;
       justify-content: center;
       .verticalHeaderText {
+        font-weight: 700;
+        font-size: 24px;
         transform: rotate(-90deg);
       }
       border-bottom: none;
@@ -48,9 +50,15 @@
         justify-content: center;
       }
     }
-    .textArea {
-      margin: 40px 0;
-      height: 100px;
+    .textAreaContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-right: 32px;
+      .textArea {
+        margin: 40px 0;
+        height: 100px;
+      }
     }
   }
   .finalSumContainer {
@@ -63,6 +71,14 @@
       border-radius: 4px;
       border: 1px solid #363333;
     }
+    .btn {
+      margin-left: 40px;
+    }
+  }
+  .btnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 

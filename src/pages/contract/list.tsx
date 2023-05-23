@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 import Styles from "../../styles/contractList.module.scss";
 import globalStyle from "../../styles/globals.module.scss";
-// import { numberRegx } from "@/util/util";
 
 interface functionNameArrayObj {
   bountyValue: any;
@@ -16,13 +15,11 @@ interface contractData {
 }
 
 const ContractList = (): JSX.Element => {
+  const [contractdata, setContractdata] = useState<contractData[]>([]);
+  const [totalEth, setTotalEth] = useState<any>([]);
+  const [finalTotal, setFinalTotal] = useState<number>(0);
+
   const router: any = useRouter();
-  const [contractdata, setContractdata] = useState<contractData[]>([
-    {
-      functionNameArray: [],
-      contractName: "",
-    },
-  ]);
 
   useEffect(() => {
     if (router.isReady) {
@@ -30,7 +27,22 @@ const ContractList = (): JSX.Element => {
     }
   }, [router.isReady]);
 
-  console.log(contractdata);
+  useEffect(() => {
+    if (contractdata.length > 0) {
+      let finalTotal = 0;
+      const totalETHArray = contractdata.map((m: contractData) => {
+        const reducedValue = m.functionNameArray.reduce(
+          (accumulator, currentVlaue) =>
+            accumulator + parseFloat(currentVlaue.bountyValue),
+          0
+        );
+        finalTotal = finalTotal + reducedValue;
+        return reducedValue;
+      });
+      setFinalTotal(finalTotal);
+      setTotalEth([...totalETHArray]);
+    }
+  }, [contractdata]);
 
   return (
     <div className={Styles.listContainer}>
@@ -59,6 +71,7 @@ const ContractList = (): JSX.Element => {
                           <div className={Styles.inputAmountContainer}>
                             <input
                               type="number"
+                              inputMode="numeric"
                               className={`${Styles.bountyAmount} ${globalStyle.input_element}`}
                               placeholder="Enter bounty"
                               value={fm.bountyValue}
@@ -79,7 +92,7 @@ const ContractList = (): JSX.Element => {
                     })}
                     <div className={Styles.finalSum}>
                       <input
-                        value={totalSumOfETH || 0}
+                        value={totalEth.length > 0 ? totalEth[i] : 0}
                         disabled={true}
                         className={`${Styles.bountyAmount} ${globalStyle.input_element}`}
                         placeholder="Final contract bounty"
@@ -87,18 +100,26 @@ const ContractList = (): JSX.Element => {
                       <label className={Styles.bountyAmountLabel}>ETH</label>
                     </div>
                   </div>
-                  <textarea
-                    placeholder="Add Contract Description if any"
-                    className={Styles.textArea}
-                  ></textarea>
+                  <div className={Styles.textAreaContainer}>
+                    <textarea
+                      placeholder="Add Contract Description if any"
+                      className={Styles.textArea}
+                    />
+                  </div>
                 </div>
               </div>
             );
           })}
           <div className={Styles.finalSumContainer}>
             <div className={Styles.finalSumItem}>
-              Final amount = ETH fro your bounty
+              Final amount = {finalTotal} ETH for your bounty
             </div>
+            <button
+              className={`${globalStyle.btn} ${Styles.btn}`}
+              onClick={() => {}}
+            >
+              Submit
+            </button>
           </div>
         </>
       ) : (
