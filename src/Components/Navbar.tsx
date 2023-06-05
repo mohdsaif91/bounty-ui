@@ -11,7 +11,7 @@ const Navbar = () => {
         <Link className={Styles.link} href="/developers">
           <li className={Styles.navLink}>Developers</li>
         </Link>
-        <Link className={Styles.link} href="contract/upload">
+        <Link className={Styles.link} href="/contract/upload">
           <li className={Styles.navLink}>Upload</li>
         </Link>
         {/* <Link className={Styles.link} href="#">

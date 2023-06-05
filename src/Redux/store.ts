@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-// import {} from "./slice/contract";
+import { developerReducer } from "./slice/developer";
 
 const reducer = {
-  //   contract: "",
+  developer: developerReducer,
 };
 
 export const store = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) =>
+  middleware: (getDefaultMiddleware: any) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),

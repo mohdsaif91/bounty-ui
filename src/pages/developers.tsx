@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
 import { authenticApi } from "@/API/api";
 import { apiList } from "@/API/apiList";
+import { TDispatch, TStore } from "@/Redux/store";
+import { getDeveloperData } from "@/Redux/slice/developer";
 
 import styles from "../styles/developers.module.scss";
 
 function Developers(props: any) {
+  const [developerList, setDeveloperList] = useState<[]>([]);
+
+  const dispatch = useDispatch<any>();
+  const developerData = useSelector<TStore>(
+    (state) => state.developer.developerList
+  );
+
+  useEffect(() => {
+    if (developerData) {
+      setDeveloperList(developerData as []);
+    } else {
+      dispatch(getDeveloperData());
+    }
+  }, [developerData]);
+
   return (
     <div className={styles.developer_container}>
       <table className={styles.table}>

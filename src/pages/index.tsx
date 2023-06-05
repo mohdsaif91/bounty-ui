@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { authenticApi } from "@/API/api";
 import { apiList } from "@/API/apiList";
 import { emailValidation, getFormData, validateString } from "@/util/util";
+import { useAppDispatch } from "@/Redux/storeHooks";
+import { addDeveloper } from "@/Redux/slice/developer";
+import { TDispatch } from "@/Redux/store";
 
 import globalStyles from "@/styles/globals.module.scss";
 import styles from "@/styles/Home.module.scss";
@@ -37,21 +41,14 @@ export default function Home() {
     ...initialFormData,
   });
 
+  const dispatch = useDispatch<TDispatch>();
+
   const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
-    const apiPayload = {
-      url: apiList.addDeveloper,
-      method: "post",
-      data: getFormData(formData),
-    };
-    authenticApi(apiPayload)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {});
+    dispatch(addDeveloper(getFormData(formData)));
   };
 
   return (

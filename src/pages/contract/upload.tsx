@@ -38,8 +38,6 @@ function upload() {
                 .then((res) => {
                   setLoading(false);
                   if (res.status === 200) {
-                    console.log(res.data);
-
                     router.push({
                       pathname: "/contract/list",
                       query: {
@@ -49,7 +47,6 @@ function upload() {
                   }
                 })
                 .catch((err) => {
-                  console.log(err);
                   setLoading(false);
                 });
             }}
